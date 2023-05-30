@@ -189,6 +189,12 @@ public class DbHelper extends SQLiteOpenHelper {
         db.close();
     }
 
+    public void deleteListByUsername(String username) {
+        SQLiteDatabase db = getWritableDatabase();
+        db.delete(TABLE_LISTS, COLUMN_LIST_OWNER + " =?", new String[] {username});
+        db.close();
+    }
+
 
     // table ITEMS methods
     public OneShoppingListElement[] readItems(String listName) {

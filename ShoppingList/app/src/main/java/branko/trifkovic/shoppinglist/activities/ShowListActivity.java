@@ -26,6 +26,7 @@ import branko.trifkovic.shoppinglist.R;
 import branko.trifkovic.shoppinglist.itemListAdapter.CustomAdapterOneList;
 import branko.trifkovic.shoppinglist.itemListAdapter.OneShoppingListElement;
 import branko.trifkovic.shoppinglist.other.HttpHelper;
+import branko.trifkovic.shoppinglist.other.MyService;
 
 public class ShowListActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -120,8 +121,6 @@ public class ShowListActivity extends AppCompatActivity implements View.OnClickL
                             }
                         });
                     }
-
-
 
 
                 } catch (IOException e) {
@@ -226,6 +225,10 @@ public class ShowListActivity extends AppCompatActivity implements View.OnClickL
 
             readSharedTasks(listTitle.getText().toString());
         } else if(view.getId() == R.id.homeButtonShowListActivity) {
+            // Stop sync DB and server
+            Intent intent = new Intent(this, MyService.class);
+            stopService(intent);
+
             Intent home = new Intent(ShowListActivity.this, MainActivity.class);
             startActivity(home);
         }

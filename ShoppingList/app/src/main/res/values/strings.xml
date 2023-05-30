@@ -25,14 +25,13 @@
     <string name="DB_NAME">shared_list_app.db</string>
     <string name="title">TITLE</string>
 
-    <string name="POST_LOGIN_URL">http://192.168.209.246:3000/login</string>
-    <string name="POST_REGISTER_URL">http://192.168.209.246:3000/users</string>
-    <string name="POST_NEW_LIST_URL">http://192.168.209.246:3000/lists</string>
-    <string name="GET_LISTS_URL">http://192.168.209.246:3000/lists</string>
-    <string name="DELETE_LISTS_URL">http://192.168.209.246:3000/lists</string>
-    <string name="POST_CREATE_ITEM_URL">http://192.168.209.246:3000/tasks</string>
-    <string name="DELETE_ITEM_URL">http://192.168.209.246:3000/tasks</string>
-    <string name="GET_ITEMS_URL">http://192.168.209.246:3000/tasks</string>
-    <string name="POST_CHANGE_DONE_URL">http://192.168.209.246:3000/tasks/change</string>
-
+    <string name="POST_LOGIN_URL">http://192.168.1.16:3000/login</string>
+    <string name="POST_REGISTER_URL">http://192.168.1.16:3000/users</string>
+    <string name="POST_NEW_LIST_URL">http://192.168.1.16:3000/lists</string>
+    <string name="GET_LISTS_URL">http://192.168.1.16:3000/lists</string>
+    <string name="DELETE_LISTS_URL">http://192.168.1.16:3000/lists</string>
+    <string name="POST_CREATE_ITEM_URL">http://192.168.1.16:3000/tasks</string>
+    <string name="DELETE_ITEM_URL">http://192.168.1.16:3000/tasks</string>
+    <string name="GET_ITEMS_URL">http://192.168.1.16:3000/tasks</string>
+    <string name="POST_CHANGE_DONE_URL">http://192.168.1.16:3000/tasks/change</string>
 </resources>

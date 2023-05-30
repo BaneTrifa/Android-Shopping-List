@@ -314,3 +314,28 @@ app.post('/tasks/change', async (req, res) => {
 
     res.json({ message: 'Task changed successfully' });
 });
+
+/**
+
+@api {get} /users/:username/lists Get Lists from user
+@apiName GetListsFromUser
+@apiGroup List
+@apiSuccess {Object[]} lists List of all lists.
+@apiSuccess {String} lists._id List's unique identifier.
+@apiSuccess {String} lists.name List's name.
+@apiSuccess {String} lists.creator User's username who created the list.
+@apiSuccess {Boolean} lists.shared Flag indicating if the list is shared.
+*/
+app.get('/users/:username/lists', async (req, res) => {
+	const username = req.params.username;
+	
+	List.find({ creator: username })
+    .then(objects => {
+      res.json(objects);
+    })
+    .catch(error => {
+      console.error(error);
+      res.status(500).json({ error: 'Failed to retrieve the objects.' });
+    });
+	
+});

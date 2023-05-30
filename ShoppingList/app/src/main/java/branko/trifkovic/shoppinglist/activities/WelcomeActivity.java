@@ -27,6 +27,9 @@ import branko.trifkovic.shoppinglist.R;
 import branko.trifkovic.shoppinglist.allListAdapter.AllShoppingListsElement;
 import branko.trifkovic.shoppinglist.allListAdapter.CustomAdapterAllLists;
 import branko.trifkovic.shoppinglist.other.HttpHelper;
+import branko.trifkovic.shoppinglist.other.MyService;
+import branko.trifkovic.shoppinglist.other.SharedUsername;
+
 
 public class WelcomeActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -45,6 +48,7 @@ public class WelcomeActivity extends AppCompatActivity implements View.OnClickLi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcome);
 
+        // Set all variables
         Intent i = getIntent();
         Bundle b = i.getExtras();
         sharedPref  = getSharedPreferences("branko.trifkovic.shoppinglist.prefs", MODE_PRIVATE);
@@ -69,18 +73,22 @@ public class WelcomeActivity extends AppCompatActivity implements View.OnClickLi
         }
         owner = usernameTextViewWelcome.getText().toString();
 
+        // Start sync DB and server
+        Intent serviceIntent = new Intent(this, MyService.class);
+        SharedUsername su = SharedUsername.getInstance();
+        su.setSharedVariable(owner);
+        startService(serviceIntent);
 
-        // list initialization, loading adapter and linking adapter and list
+        // List initialization, loading adapter and linking adapter and list
         ListView list = findViewById(R.id.listAllShoppingLists);
         adapter = new CustomAdapterAllLists(this);
         list.setAdapter(adapter);
 
-        // db initialization and loading lists
+        // DB initialization and loading lists
         dbHelper = new DbHelper(this, getResources().getString(R.string.DB_NAME), null, 1);
         AllShoppingListsElement[] allShoppingLists = dbHelper.readAllLists(owner);
 
         adapter.update(allShoppingLists);
-
 
 
         list.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
@@ -157,6 +165,10 @@ public class WelcomeActivity extends AppCompatActivity implements View.OnClickLi
             seeMyListsButton.setText("SEE SHARED LISTS");
 
         } else if(view.getId() == R.id.homeButtonWelcomeActivity) {
+            // Stop sync DB and server
+            Intent intent = new Intent(this, MyService.class);
+            stopService(intent);
+
             Intent home = new Intent(WelcomeActivity.this, MainActivity.class);
             startActivity(home);
         }
@@ -226,4 +238,5 @@ public class WelcomeActivity extends AppCompatActivity implements View.OnClickLi
             }
         }).start();
     }
+
 }

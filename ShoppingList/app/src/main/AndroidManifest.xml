@@ -12,8 +12,13 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/Theme.ShoppingList"
-        tools:targetApi="31"
-        android:usesCleartextTraffic="true">
+        android:usesCleartextTraffic="true"
+        tools:targetApi="31">
+        <service
+            android:name=".other.MyService"
+            android:enabled="true"
+            android:exported="true"></service>
+
         <activity
             android:name=".activities.ShowListActivity"
             android:exported="false" />

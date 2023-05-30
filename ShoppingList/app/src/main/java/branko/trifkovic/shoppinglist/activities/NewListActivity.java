@@ -20,6 +20,7 @@ import java.io.IOException;
 import branko.trifkovic.shoppinglist.other.DbHelper;
 import branko.trifkovic.shoppinglist.R;
 import branko.trifkovic.shoppinglist.other.HttpHelper;
+import branko.trifkovic.shoppinglist.other.MyService;
 
 
 public class NewListActivity extends AppCompatActivity implements View.OnClickListener {
@@ -68,6 +69,10 @@ public class NewListActivity extends AppCompatActivity implements View.OnClickLi
             listTitleTextView.setText(title);
 
         } else if (view.getId() == R.id.homeButtonNewListActivity) {
+            // Stop sync DB and server
+            Intent intent = new Intent(this, MyService.class);
+            stopService(intent);
+
             Intent home = new Intent(NewListActivity.this, MainActivity.class);
             startActivity(home);
         }
