@@ -28,6 +28,7 @@ import branko.trifkovic.shoppinglist.activities.WelcomeActivity;
 import branko.trifkovic.shoppinglist.allListAdapter.AllShoppingListsElement;
 import branko.trifkovic.shoppinglist.itemListAdapter.OneShoppingListElement;
 
+// Service for syncing database and server
 public class MyService extends Service {
 
 
