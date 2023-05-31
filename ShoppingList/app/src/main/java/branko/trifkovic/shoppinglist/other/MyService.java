@@ -4,6 +4,7 @@ import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.Service;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.IBinder;
@@ -35,7 +36,7 @@ public class MyService extends Service {
     private HttpHelper httpHelper = new HttpHelper();
     private DbHelper db = new DbHelper(this, "shared_list_app.db", null, 1);
     private String CHANNEL_ID = "1";
-    NotificationManagerCompat notificationManager;
+    NotificationManager notificationManager;
     Notification notification;
 
     @Override
@@ -46,11 +47,12 @@ public class MyService extends Service {
         mUsername = su.getSharedVariable();
         String URL = "http://192.168.1.16:3000/users/" + mUsername + "/lists";
 
+        createNotificationChannel();
+
         new Thread(new Runnable() {
             @Override
             public void run() {
                 while (mRun) {
-                    Log.d("ServiceTAG", "Hello " + mUsername + " from service thread");
                     try {
                         db.deleteListByUsername(mUsername);
                         JSONArray array = httpHelper.getJSONArrayFromURL(URL);
@@ -65,17 +67,7 @@ public class MyService extends Service {
                             db.addList(name, shared ? 1 : 0, creator);
                         }
 
-                        createNotificationChannel();
-                        NotificationCompat.Builder builder = new NotificationCompat.Builder(MyService.this, CHANNEL_ID)
-                                .setSmallIcon(R.drawable.baseline_home_24)
-                                .setContentTitle("My notification")
-                                .setContentText("Much longer text that cannot fit one line...")
-                                .setStyle(new NotificationCompat.BigTextStyle()
-                                        .bigText("Much longer text that cannot fit one line..."))
-                                .setPriority(NotificationCompat.PRIORITY_DEFAULT);
-
-                        notification = builder.build();
-                        notificationManager = NotificationManagerCompat.from(MyService.this);
+                        notificationManager.notify(0, notification);
 
                         Thread.sleep(3000);
 
@@ -105,13 +97,6 @@ public class MyService extends Service {
         Log.d("ServiceTAG", "Service is stopped");
     }
 
-
-    @Override
-    public IBinder onBind(Intent intent) {
-        // TODO: Return the communication channel to the service.
-        throw new UnsupportedOperationException("Not yet implemented");
-    }
-
     private void createNotificationChannel() {
         // Create the NotificationChannel, but only on API 26+ because
         // the NotificationChannel class is new and not in the support library
@@ -126,5 +111,23 @@ public class MyService extends Service {
             NotificationManager notificationManager = getSystemService(NotificationManager.class);
             notificationManager.createNotificationChannel(channel);
         }
+
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(MyService.this, CHANNEL_ID)
+                .setSmallIcon(R.drawable.baseline_shopping_basket_24)
+                .setContentTitle("Shopping List")
+                .setContentText("Database synchronized")
+                .setStyle(new NotificationCompat.BigTextStyle()
+                        .bigText("Database synchronized"))
+                .setPriority(NotificationCompat.PRIORITY_DEFAULT);
+
+        notification = builder.build();
+        notificationManager = (NotificationManager)getSystemService(Context.NOTIFICATION_SERVICE);
+    }
+
+
+    @Override
+    public IBinder onBind(Intent intent) {
+        // TODO: Return the communication channel to the service.
+        throw new UnsupportedOperationException("Not yet implemented");
     }
 }
