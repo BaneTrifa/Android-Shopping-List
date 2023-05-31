@@ -113,7 +113,7 @@ public class MyService extends Service {
         }
 
         NotificationCompat.Builder builder = new NotificationCompat.Builder(MyService.this, CHANNEL_ID)
-                .setSmallIcon(R.drawable.baseline_shopping_basket_24)
+                .setSmallIcon(R.drawable.baseline_shopping_cart_24)
                 .setContentTitle("Shopping List")
                 .setContentText("Database synchronized")
                 .setStyle(new NotificationCompat.BigTextStyle()
