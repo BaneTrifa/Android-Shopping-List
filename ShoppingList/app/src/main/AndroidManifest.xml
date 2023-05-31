@@ -17,7 +17,7 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <service
-            android:name=".other.MyService"
+            android:name=".other.DataBaseSyncing"
             android:enabled="true"
             android:exported="true"></service>
 

@@ -4,7 +4,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -26,7 +25,7 @@ import branko.trifkovic.shoppinglist.R;
 import branko.trifkovic.shoppinglist.itemListAdapter.CustomAdapterOneList;
 import branko.trifkovic.shoppinglist.itemListAdapter.OneShoppingListElement;
 import branko.trifkovic.shoppinglist.other.HttpHelper;
-import branko.trifkovic.shoppinglist.other.MyService;
+import branko.trifkovic.shoppinglist.other.DataBaseSyncing;
 
 public class ShowListActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -226,7 +225,7 @@ public class ShowListActivity extends AppCompatActivity implements View.OnClickL
             readSharedTasks(listTitle.getText().toString());
         } else if(view.getId() == R.id.homeButtonShowListActivity) {
             // Stop sync DB and server
-            Intent intent = new Intent(this, MyService.class);
+            Intent intent = new Intent(this, DataBaseSyncing.class);
             stopService(intent);
 
             Intent home = new Intent(ShowListActivity.this, MainActivity.class);

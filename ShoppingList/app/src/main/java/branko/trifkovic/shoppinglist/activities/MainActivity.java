@@ -2,7 +2,6 @@ package branko.trifkovic.shoppinglist.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -12,7 +11,6 @@ import android.widget.LinearLayout;
 import branko.trifkovic.shoppinglist.R;
 import branko.trifkovic.shoppinglist.fragments.LoginFragment;
 import branko.trifkovic.shoppinglist.fragments.RegisterFragment;
-import branko.trifkovic.shoppinglist.other.MyService;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 

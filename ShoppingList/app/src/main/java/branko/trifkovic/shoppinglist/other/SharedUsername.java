@@ -1,6 +1,6 @@
 package branko.trifkovic.shoppinglist.other;
 
-// Singleton pattern - shares variable username between Welcome Acivity and MyService class
+// Singleton pattern - shares variable username between Welcome Acivity and DataBaseSyncing class
 public class SharedUsername {
     private static SharedUsername instance;
     private String mUsername;

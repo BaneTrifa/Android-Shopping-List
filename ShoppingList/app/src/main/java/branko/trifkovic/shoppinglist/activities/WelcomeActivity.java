@@ -6,7 +6,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -22,12 +21,12 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 
+import branko.trifkovic.shoppinglist.other.DataBaseSyncing;
 import branko.trifkovic.shoppinglist.other.DbHelper;
 import branko.trifkovic.shoppinglist.R;
 import branko.trifkovic.shoppinglist.allListAdapter.AllShoppingListsElement;
 import branko.trifkovic.shoppinglist.allListAdapter.CustomAdapterAllLists;
 import branko.trifkovic.shoppinglist.other.HttpHelper;
-import branko.trifkovic.shoppinglist.other.MyService;
 import branko.trifkovic.shoppinglist.other.SharedUsername;
 
 
@@ -74,7 +73,7 @@ public class WelcomeActivity extends AppCompatActivity implements View.OnClickLi
         owner = usernameTextViewWelcome.getText().toString();
 
         // Start sync DB and server
-        Intent serviceIntent = new Intent(this, MyService.class);
+        Intent serviceIntent = new Intent(this, DataBaseSyncing.class);
         SharedUsername su = SharedUsername.getInstance();
         su.setSharedVariable(owner);
         startService(serviceIntent);
@@ -166,7 +165,7 @@ public class WelcomeActivity extends AppCompatActivity implements View.OnClickLi
 
         } else if(view.getId() == R.id.homeButtonWelcomeActivity) {
             // Stop sync DB and server
-            Intent intent = new Intent(this, MyService.class);
+            Intent intent = new Intent(this, DataBaseSyncing.class);
             stopService(intent);
 
             Intent home = new Intent(WelcomeActivity.this, MainActivity.class);

@@ -9,11 +9,8 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.IBinder;
 import android.util.Log;
-import android.widget.Toast;
 
-import androidx.core.app.NotificationBuilderWithBuilderAccessor;
 import androidx.core.app.NotificationCompat;
-import androidx.core.app.NotificationManagerCompat;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -22,14 +19,9 @@ import org.json.JSONObject;
 import java.io.IOException;
 
 import branko.trifkovic.shoppinglist.R;
-import branko.trifkovic.shoppinglist.activities.MainActivity;
-import branko.trifkovic.shoppinglist.activities.ShowListActivity;
-import branko.trifkovic.shoppinglist.activities.WelcomeActivity;
-import branko.trifkovic.shoppinglist.allListAdapter.AllShoppingListsElement;
-import branko.trifkovic.shoppinglist.itemListAdapter.OneShoppingListElement;
 
 // Service for syncing database and server
-public class MyService extends Service {
+public class DataBaseSyncing extends Service {
 
 
     private boolean mRun = true;
@@ -113,7 +105,7 @@ public class MyService extends Service {
             notificationManager.createNotificationChannel(channel);
         }
 
-        NotificationCompat.Builder builder = new NotificationCompat.Builder(MyService.this, CHANNEL_ID)
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(DataBaseSyncing.this, CHANNEL_ID)
                 .setSmallIcon(R.drawable.baseline_shopping_cart_24)
                 .setContentTitle("Shopping List")
                 .setContentText("Database synchronized")
